@@ -1,8 +1,8 @@
 class Persona 
 {
-    Id;
-    Nombre;
-    FechaNac;
+    id;
+    nombre;
+    fechaNac;
 }
 
 export default Persona;
