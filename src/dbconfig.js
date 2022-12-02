@@ -4,3 +4,5 @@ const config =
     database:"CRUDNode",
     options: {trustedConnection:true, trustServerCertificate:true}
 }
+
+export default config;
