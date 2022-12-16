@@ -6,7 +6,7 @@ class PersonaService {
         console.log('Estoy en PersonaService.GetAll()');
         try{
             let pool = await sql.connect(config);
-            let result = await pool.request().query('SELECT * FROM Persona');
+            let result = await pool.request().query('SELECT * FROM Personas');
             return result.recordsets[0];
         }
         catch (error) {
@@ -20,7 +20,7 @@ class PersonaService {
             let pool = await sql.connect(config);
             let result = await pool.request()
                 .input('pId', sql.Int,id)
-                .query('SELECT * FROM Persona WHERE Id=@pId');
+                .query('SELECT * FROM Personas WHERE Id=@pId');
             return result.recordsets[0];
         }
         catch (error) {
@@ -35,7 +35,7 @@ class PersonaService {
             let result = await pool.request()
                 .input('pNombre', sql.VarChar,persona?.nombre ?? '')
                 .input('pFechaNac', sql.DateTime,persona?.fechaNac ?? '')
-                .query('INSERT INTO Persona (Nombre, FechaNac) VALUES (@pNombre, pFechaNac)');
+                .query('INSERT INTO Personas (Nombre, FechaNac) VALUES (@pNombre, pFechaNac)');
             return result.rowsAffected;
         }
         catch (error) {
@@ -51,7 +51,7 @@ class PersonaService {
                 .input('pId', sql.VarChar,persona?.id ?? '')
                 .input('pNombre', sql.VarChar,persona?.nombre ?? '')
                 .input('pFechaNac', sql.DateTime,persona?.fechaNac ?? '')
-                .query('UPDATE Persona set Nombre=@pNombre, FechaNac=@pFechaNac WHERE Id=@pId');
+                .query('UPDATE Personas set Nombre=@pNombre, FechaNac=@pFechaNac WHERE Id=@pId');
             return result.rowsAffected;
         }
         catch (error) {
@@ -65,7 +65,7 @@ class PersonaService {
             let pool = await sql.connect(config);
             let result = await pool.request()
                 .input('pId', sql.Int,id)
-                .query('DELETE FROM Persona WHERE Id=@pId');
+                .query('DELETE FROM Personas WHERE Id=@pId');
             return result.rowsAffected;
         }
         catch (error) {
