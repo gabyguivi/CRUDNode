@@ -1,5 +1,5 @@
-import config from "../dbconfig";
-import sql from 'mssql';
+import config from "../dbconfig.js";
+import sql from "mssql";
 
 class PersonaService {
     getAll = async () =>{
@@ -11,7 +11,6 @@ class PersonaService {
         }
         catch (error) {
             console.log(error);
-            throw error;
         }
     }
     getById = async (id) =>{
@@ -25,7 +24,6 @@ class PersonaService {
         }
         catch (error) {
             console.log(error);
-            throw error;
         }
     }
     insert = async (persona) =>{
@@ -35,12 +33,11 @@ class PersonaService {
             let result = await pool.request()
                 .input('pNombre', sql.VarChar,persona?.nombre ?? '')
                 .input('pFechaNac', sql.DateTime,persona?.fechaNac ?? '')
-                .query('INSERT INTO Personas (Nombre, FechaNac) VALUES (@pNombre, pFechaNac)');
+                .query('INSERT INTO Personas (nombre, fechaNac) VALUES (@pNombre, @pFechaNac)');
             return result.rowsAffected;
         }
         catch (error) {
             console.log(error);
-            throw error;
         }
     }
     update = async (persona) =>{
@@ -48,7 +45,7 @@ class PersonaService {
         try{
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('pId', sql.VarChar,persona?.id ?? '')
+                .input('pId', sql.Int,persona?.id ?? '')
                 .input('pNombre', sql.VarChar,persona?.nombre ?? '')
                 .input('pFechaNac', sql.DateTime,persona?.fechaNac ?? '')
                 .query('UPDATE Personas set Nombre=@pNombre, FechaNac=@pFechaNac WHERE Id=@pId');
@@ -56,7 +53,6 @@ class PersonaService {
         }
         catch (error) {
             console.log(error);
-            throw error;
         }
     }
     deleteById = async (id) =>{
@@ -70,7 +66,6 @@ class PersonaService {
         }
         catch (error) {
             console.log(error);
-            throw error;
         } 
     }
 }

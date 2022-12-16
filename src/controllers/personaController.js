@@ -1,5 +1,5 @@
 import { Router} from 'express';
-import PersonaService from '../services/persona-services.js';
+import PersonaService from '../services/persona-service.js';
 import { ReasonPhrases, StatusCodes} from 'http-status-codes';
 
 const router = Router();
